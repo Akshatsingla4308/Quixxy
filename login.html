@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login | Quixxy Online Quiz Platform</title>
+    <meta
+      name="description"
+      content="Log in to Quixxy to access your student dashboard, teacher portal, quiz sessions, and admin tools."
+    />
+    <meta property="og:title" content="Login to Quixxy" />
+    <meta property="og:description" content="Access Quixxy dashboards, teacher tools, and quiz management." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://quixxy.in/login.html" />
+    <link rel="canonical" href="https://quixxy.in/login.html" />
+    <link rel="icon" type="image/svg+xml" href="./logo.svg" />
+    <link rel="manifest" href="./site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body data-page="login" class="auth-page">
+    <div class="background-orb orb-one"></div>
+    <div class="background-orb orb-two"></div>
+
+    <header class="topbar shell-width">
+      <a href="./index.html" class="brand-mark">
+        <span class="brand-dot"></span>
+        <span>Quixxy</span>
+      </a>
+      <nav class="nav-actions">
+        <button id="theme-toggle" class="btn btn-ghost theme-toggle" type="button" aria-label="Toggle theme">
+          <span class="theme-icon">Dark</span>
+        </button>
+        <a href="./signup.html" class="btn btn-secondary">Create Account</a>
+      </nav>
+    </header>
+
+    <main class="shell-width auth-layout">
+      <section class="glass-card auth-card">
+        <span class="eyebrow">Welcome back</span>
+        <h1>Log into your workspace</h1>
+        <p class="muted-copy">Use your Quixxy credentials to continue to your dashboard or studio.</p>
+
+        <div class="inline-note warning-note" data-config-warning hidden>
+          Firebase is still using placeholder credentials. Update <code>config/firebase.js</code> to enable login and Firestore access.
+        </div>
+
+        <form id="login-form" class="stack-form" novalidate>
+          <label class="input-group">
+            <span>Email Address</span>
+            <input id="login-email" type="email" name="email" placeholder="alex@quixxy.app" required />
+          </label>
+
+          <label class="input-group">
+            <span>Password</span>
+            <input id="login-password" type="password" name="password" placeholder="Enter your password" required />
+          </label>
+
+          <button id="login-submit" class="btn btn-primary btn-block" type="submit">Log In</button>
+        </form>
+
+        <p class="auth-meta">
+          Need an account?
+          <a href="./signup.html">Create one now</a>
+        </p>
+      </section>
+
+      <aside class="glass-card auth-aside">
+        <div class="auth-aside-topline">
+          <span class="eyebrow">Why Quixxy</span>
+          <span class="live-indicator">Live ready</span>
+        </div>
+        <h2>Compete, teach, and manage from one interface.</h2>
+        <div class="auth-preview-panel" aria-hidden="true">
+          <div class="auth-preview-header">
+            <span>Classroom Sprint</span>
+            <strong>92%</strong>
+          </div>
+          <div class="auth-preview-bars">
+            <span style="--bar: 88%"></span>
+            <span style="--bar: 68%"></span>
+            <span style="--bar: 46%"></span>
+          </div>
+        </div>
+        <ul class="feature-list">
+          <li>Role-aware navigation for students, teachers, and admins</li>
+          <li>Live quiz attempts stored in Firestore</li>
+          <li>Leaderboard ranking with polished SaaS-style UI</li>
+        </ul>
+      </aside>
+    </main>
+
+    <script type="module" src="./js/app.js"></script>
+  </body>
+</html>

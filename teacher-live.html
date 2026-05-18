@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Live Quiz Host | Quixxy Teacher Portal</title>
+    <meta
+      name="description"
+      content="Host a realtime Quixxy classroom quiz with synced timers, live participants, answer analytics, and leaderboard controls."
+    />
+    <meta property="og:title" content="Quixxy Live Quiz Host" />
+    <meta
+      property="og:description"
+      content="Realtime classroom hosting for teacher-led quizzes on Quixxy."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://quixxy.in/teacher-live.html" />
+    <link rel="canonical" href="https://quixxy.in/teacher-live.html" />
+    <link rel="icon" type="image/svg+xml" href="./logo.svg" />
+    <link rel="manifest" href="./site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body data-page="teacher-live">
+    <div class="background-orb orb-one"></div>
+    <div class="background-orb orb-three"></div>
+
+    <header class="topbar shell-width">
+      <a href="./teacher.html" class="brand-mark">
+        <span class="brand-dot"></span>
+        <span>Quixxy</span>
+      </a>
+
+      <div class="topbar-cluster">
+        <button id="theme-toggle" class="btn btn-ghost theme-toggle" type="button" aria-label="Toggle theme">
+          <span class="theme-icon">Dark</span>
+        </button>
+        <a href="./teacher.html" class="btn btn-secondary">Teacher Dashboard</a>
+        <div class="user-chip" id="teacher-live-user">Teacher</div>
+        <button id="logout-button" type="button" class="btn btn-ghost">Log Out</button>
+      </div>
+    </header>
+
+    <main class="shell-width page-stack">
+      <div class="inline-note warning-note" data-config-warning hidden>
+        Firebase is still using placeholder credentials. Update <code>config/firebase.js</code> before hosting.
+      </div>
+
+      <section class="glass-card hero-banner live-hero">
+        <div>
+          <span class="eyebrow">Live hosting</span>
+          <h1 id="teacher-live-title">Teacher quiz</h1>
+          <p class="muted-copy">Students join with the code below. Each question can use its own timer from your quiz builder.</p>
+        </div>
+
+        <div class="session-code-card">
+          <span>Join Code</span>
+          <strong id="session-code">------</strong>
+          <small id="join-url">https://quixxy.in/join.html</small>
+          <button id="copy-link-button" type="button" class="btn btn-secondary">Copy Link</button>
+        </div>
+      </section>
+
+      <section class="live-control-bar glass-card">
+        <div>
+          <span class="status-badge status-waiting" id="session-status">waiting</span>
+          <span class="muted-copy" id="teacher-live-progress">Question 1 of 1</span>
+          <span class="muted-copy" id="participant-count">0 participants</span>
+        </div>
+
+        <div class="hero-actions">
+          <button id="start-live-button" type="button" class="btn btn-primary">Start Quiz</button>
+          <button id="pause-timer-button" type="button" class="btn btn-secondary">Pause Timer</button>
+          <button id="decrease-timer-button" type="button" class="btn btn-secondary">-5s</button>
+          <button id="increase-timer-button" type="button" class="btn btn-secondary">+5s</button>
+          <button id="skip-question-button" type="button" class="btn btn-secondary">Skip</button>
+          <button id="next-question-button" type="button" class="btn btn-secondary">Next Question</button>
+          <button id="end-session-button" type="button" class="btn btn-ghost">End Session</button>
+        </div>
+      </section>
+
+      <section class="live-layout">
+        <div class="section-stack">
+          <section class="glass-card quiz-stage">
+            <div class="timer-dashboard">
+              <div>
+                <span class="eyebrow">Timer</span>
+                <strong id="live-timer-display">30s</strong>
+              </div>
+              <p id="timer-state-copy" class="muted-copy">Ready to start.</p>
+            </div>
+
+            <div class="quiz-progress-row">
+              <div class="progress-track">
+                <div id="teacher-live-progress-bar" class="progress-bar"></div>
+              </div>
+            </div>
+
+            <article class="question-panel">
+              <div class="question-header">
+                <span id="teacher-current-label" class="question-count">Waiting room</span>
+                <span id="current-response-count" class="muted-copy">0 answered</span>
+              </div>
+
+              <h2 id="teacher-current-question">Participants can join with the code above.</h2>
+              <div id="teacher-question-options" class="option-grid"></div>
+            </article>
+          </section>
+
+          <section class="glass-card">
+            <div class="section-heading compact-heading">
+              <div>
+                <span class="eyebrow">Answer distribution</span>
+                <h2>Current question</h2>
+              </div>
+            </div>
+            <div id="answer-distribution" class="distribution-list"></div>
+          </section>
+
+          <section class="glass-card">
+            <div class="section-heading compact-heading">
+              <div>
+                <span class="eyebrow">Participants</span>
+                <h2>Joined live</h2>
+              </div>
+            </div>
+            <div id="participant-list" class="participant-list"></div>
+          </section>
+
+          <section class="glass-card">
+            <div class="section-heading compact-heading">
+              <div>
+                <span class="eyebrow">Response status</span>
+                <h2>Correct, wrong, missing</h2>
+              </div>
+            </div>
+            <div id="answer-status-list" class="answer-status-grid"></div>
+          </section>
+        </div>
+
+        <aside class="section-stack">
+          <section class="glass-card leaderboard-shell">
+            <div class="section-heading compact-heading">
+              <div>
+                <span class="eyebrow">Leaderboard</span>
+                <h2>Realtime scores</h2>
+              </div>
+            </div>
+            <div id="live-leaderboard"></div>
+          </section>
+        </aside>
+      </section>
+    </main>
+
+    <script type="module" src="./js/teacher-live.js"></script>
+  </body>
+</html>

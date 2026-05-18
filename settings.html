@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Settings | Quixxy — Account &amp; Preferences</title>
+    <meta
+      name="description"
+      content="Manage your Quixxy profile, theme, notifications, teacher defaults, and admin branding from one settings hub."
+    />
+    <meta property="og:title" content="Quixxy Settings" />
+    <meta property="og:description" content="Account preferences, theme, and platform settings for Quixxy." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://quixxy.in/settings.html" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Quixxy Settings" />
+    <link rel="canonical" href="https://quixxy.in/settings.html" />
+    <link rel="icon" type="image/svg+xml" href="./logo.svg" />
+    <link rel="manifest" href="./site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body data-page="settings">
+    <header class="topbar shell-width">
+      <a href="./dashboard.html" class="brand-mark" id="settings-brand-home">
+        <span class="brand-dot"></span>
+        <span>Quixxy</span>
+      </a>
+      <div class="topbar-cluster">
+        <button id="theme-toggle" class="btn btn-ghost theme-toggle" type="button" aria-label="Toggle theme">
+          <span class="theme-icon">Dark</span>
+        </button>
+        <a id="settings-home-link" class="btn btn-secondary" href="./dashboard.html">Back</a>
+      </div>
+    </header>
+    <main class="shell-width page-stack">
+      <section class="glass-card">
+        <div class="section-heading compact-heading">
+          <div>
+            <span class="eyebrow">Account settings</span>
+            <h2>Profile and preferences</h2>
+          </div>
+        </div>
+        <form id="user-settings-form" class="stack-form">
+          <div id="settings-teacher-only">
+            <div class="form-grid">
+              <label class="input-group">
+                <span>Institute Name</span>
+                <input id="settings-institute" type="text" placeholder="Your school or institute" />
+              </label>
+              <label class="input-group">
+                <span>Profile Image URL</span>
+                <input id="settings-image" type="url" placeholder="https://..." />
+              </label>
+            </div>
+            <div class="form-grid">
+              <label class="input-group">
+                <span>Default question timer (seconds)</span>
+                <input id="settings-timer" type="number" min="5" max="120" value="30" />
+              </label>
+            </div>
+          </div>
+
+          <div id="settings-student-only" class="is-hidden">
+            <label class="input-group">
+              <span><input id="settings-notifications" type="checkbox" checked /> Product tips &amp; session reminders</span>
+            </label>
+          </div>
+
+          <div class="form-grid">
+            <label class="input-group">
+              <span>Theme</span>
+              <select id="settings-theme">
+                <option value="dark">Dark</option>
+                <option value="light">Light</option>
+              </select>
+            </label>
+          </div>
+
+          <label class="input-group" id="settings-sound-row">
+            <span><input id="settings-sound" type="checkbox" checked /> Enable UI sounds (practice quizzes)</span>
+          </label>
+
+          <button id="save-user-settings" class="btn btn-primary" type="submit">Save Settings</button>
+        </form>
+      </section>
+
+      <section id="admin-settings-panel" class="glass-card is-hidden">
+        <div class="section-heading compact-heading">
+          <div>
+            <span class="eyebrow">Admin settings</span>
+            <h2>Branding and moderation</h2>
+          </div>
+        </div>
+        <form id="admin-settings-form" class="stack-form">
+          <label class="input-group">
+            <span>Brand Name</span>
+            <input id="admin-brand-name" type="text" placeholder="Quixxy" />
+          </label>
+          <label class="input-group">
+            <span>Brand Logo URL</span>
+            <input id="admin-brand-logo" type="url" placeholder="https://..." />
+          </label>
+          <label class="input-group">
+            <span>Moderation Mode</span>
+            <select id="admin-moderation">
+              <option value="standard">Standard</option>
+              <option value="strict">Strict</option>
+            </select>
+          </label>
+          <label class="input-group">
+            <span>Analytics retention</span>
+            <select id="admin-analytics">
+              <option value="standard">Standard (recommended)</option>
+              <option value="minimal">Minimal</option>
+            </select>
+          </label>
+          <button id="save-admin-settings" class="btn btn-primary" type="submit">Save Admin Settings</button>
+        </form>
+      </section>
+    </main>
+    <script type="module" src="./js/settings.js"></script>
+  </body>
+</html>

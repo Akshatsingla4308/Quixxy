@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Account | Quixxy Online Quiz Platform</title>
+    <meta
+      name="description"
+      content="Create a Quixxy account for student quiz dashboards or teacher live quiz hosting."
+    />
+    <meta property="og:title" content="Create a Quixxy Account" />
+    <meta property="og:description" content="Sign up for student dashboards or teacher live quiz tools." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://quixxy.in/signup.html" />
+    <link rel="canonical" href="https://quixxy.in/signup.html" />
+    <link rel="icon" type="image/svg+xml" href="./logo.svg" />
+    <link rel="manifest" href="./site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body data-page="signup" class="auth-page">
+    <div class="background-orb orb-one"></div>
+    <div class="background-orb orb-three"></div>
+
+    <header class="topbar shell-width">
+      <a href="./index.html" class="brand-mark">
+        <span class="brand-dot"></span>
+        <span>Quixxy</span>
+      </a>
+      <nav class="nav-actions">
+        <button id="theme-toggle" class="btn btn-ghost theme-toggle" type="button" aria-label="Toggle theme">
+          <span class="theme-icon">Dark</span>
+        </button>
+        <a href="./login.html" class="btn btn-secondary">Log In</a>
+      </nav>
+    </header>
+
+    <main class="shell-width auth-layout">
+      <section class="glass-card auth-card">
+        <span class="eyebrow">Get started</span>
+        <h1>Create your Quixxy account</h1>
+        <p class="muted-copy">Students can join quizzes instantly, while teachers can publish question sets and manage content.</p>
+
+        <div class="inline-note warning-note" data-config-warning hidden>
+          Firebase is still using placeholder credentials. Update <code>config/firebase.js</code> before trying to sign up.
+        </div>
+
+        <form id="signup-form" class="stack-form" novalidate>
+          <label class="input-group">
+            <span>Full Name</span>
+            <input id="signup-name" type="text" name="name" placeholder="Alex Carter" required />
+          </label>
+
+          <label class="input-group">
+            <span>Email Address</span>
+            <input id="signup-email" type="email" name="email" placeholder="alex@quixxy.app" required />
+          </label>
+
+          <div class="form-grid compact-grid">
+            <label class="input-group">
+              <span>Password</span>
+              <input id="signup-password" type="password" name="password" placeholder="At least 6 characters" required minlength="6" />
+            </label>
+
+            <label class="input-group">
+              <span>Confirm Password</span>
+              <input id="signup-confirm-password" type="password" name="confirmPassword" placeholder="Re-enter password" required minlength="6" />
+            </label>
+          </div>
+
+          <label class="input-group">
+            <span>Role</span>
+            <select id="signup-role" name="role" required>
+              <option value="student">Student</option>
+              <option value="teacher">Teacher</option>
+            </select>
+          </label>
+
+          <p class="helper-text">Admin access should be assigned manually in Firestore for real deployments.</p>
+
+          <button id="signup-submit" class="btn btn-primary btn-block" type="submit">Create Account</button>
+        </form>
+
+        <p class="auth-meta">
+          Already have an account?
+          <a href="./login.html">Log in instead</a>
+        </p>
+      </section>
+
+      <aside class="glass-card auth-aside">
+        <div class="auth-aside-topline">
+          <span class="eyebrow">What you unlock</span>
+          <span class="live-indicator">Secure roles</span>
+        </div>
+        <h2>Modern quiz workflows without a frontend framework.</h2>
+        <div class="auth-preview-panel" aria-hidden="true">
+          <div class="auth-preview-header">
+            <span>Onboarding flow</span>
+            <strong>3 min</strong>
+          </div>
+          <div class="auth-preview-steps">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+        <ul class="feature-list">
+          <li>Quiz dashboard with live stats and category discovery</li>
+          <li>Teacher studio for publishing structured question sets</li>
+          <li>Admin controls for users, quizzes, and leaderboard visibility</li>
+        </ul>
+      </aside>
+    </main>
+
+    <script type="module" src="./js/app.js"></script>
+  </body>
+</html>

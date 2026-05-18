@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Teacher Portal | Quixxy Live Quiz Platform</title>
+    <meta
+      name="description"
+      content="Create private quizzes, host realtime classroom sessions, and review live quiz analytics in the Quixxy teacher portal."
+    />
+    <meta property="og:title" content="Quixxy Teacher Portal" />
+    <meta
+      property="og:description"
+      content="Teacher tools for private quizzes, live classroom sessions, analytics, and leaderboard review."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://quixxy.in/teacher.html" />
+    <link rel="canonical" href="https://quixxy.in/teacher.html" />
+    <link rel="icon" type="image/svg+xml" href="./logo.svg" />
+    <link rel="manifest" href="./site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body data-page="teacher">
+    <div class="background-orb orb-one"></div>
+    <div class="background-orb orb-two"></div>
+
+    <header class="topbar shell-width">
+      <a href="./teacher.html" class="brand-mark">
+        <span class="brand-dot"></span>
+        <span>Quixxy</span>
+      </a>
+
+      <div class="topbar-cluster">
+        <button id="theme-toggle" class="btn btn-ghost theme-toggle" type="button" aria-label="Toggle theme">
+          <span class="theme-icon">Dark</span>
+        </button>
+        <div class="user-chip" id="teacher-user-chip">Teacher</div>
+        <button id="logout-button" type="button" class="btn btn-ghost">Log Out</button>
+      </div>
+    </header>
+
+    <main class="shell-width page-stack">
+      <div class="inline-note warning-note" data-config-warning hidden>
+        Firebase is still using placeholder credentials. Update <code>config/firebase.js</code> before hosting live quizzes.
+      </div>
+
+      <section class="glass-card hero-banner">
+        <div>
+          <span class="eyebrow">Teacher dashboard</span>
+          <h1>Welcome, <span id="teacher-name">Teacher</span>.</h1>
+          <p class="muted-copy" id="teacher-summary">Loading your private quizzes and hosted sessions...</p>
+        </div>
+
+        <div class="hero-side-meta">
+          <div class="role-pill">teacher</div>
+          <div class="hero-actions">
+            <a href="./settings.html" class="btn btn-secondary">Settings</a>
+            <a href="#teacher-builder" class="btn btn-primary">Create Quiz</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="stats-grid">
+        <article class="glass-card stat-card">
+          <span class="stat-label">Private Quizzes</span>
+          <strong id="teacher-quiz-count">0</strong>
+        </article>
+
+        <article class="glass-card stat-card">
+          <span class="stat-label">Hosted Sessions</span>
+          <strong id="teacher-session-count">0</strong>
+        </article>
+
+        <article class="glass-card stat-card">
+          <span class="stat-label">Open Sessions</span>
+          <strong id="teacher-live-count">0</strong>
+        </article>
+
+        <article class="glass-card stat-card">
+          <span class="stat-label">Top Score</span>
+          <strong id="teacher-top-score">0</strong>
+        </article>
+      </section>
+
+      <section class="studio-grid" id="teacher-builder">
+        <div class="section-stack">
+          <section class="glass-card">
+            <div class="section-heading compact-heading">
+              <div>
+                <span class="eyebrow">Private quiz builder</span>
+                <h2 id="teacher-form-title">Create a private quiz</h2>
+              </div>
+            </div>
+
+            <form id="teacher-quiz-form" class="stack-form" novalidate>
+              <label class="input-group">
+                <span>Quiz Title</span>
+                <input id="teacher-quiz-title" type="text" placeholder="Friday Science Sprint" required />
+              </label>
+
+              <div class="section-heading compact-heading">
+                <div>
+                  <span class="eyebrow">Questions</span>
+                  <h3>Live question set</h3>
+                </div>
+                <button id="teacher-add-question" type="button" class="btn btn-secondary">Add Question</button>
+              </div>
+
+              <div id="teacher-question-builder" class="builder-stack"></div>
+
+              <div class="form-actions">
+                <button id="teacher-save-quiz" type="submit" class="btn btn-primary">Save Teacher Quiz</button>
+                <button id="teacher-clear-form" type="button" class="btn btn-ghost">Clear Form</button>
+              </div>
+            </form>
+          </section>
+        </div>
+
+        <div class="section-stack">
+          <section class="glass-card">
+            <div class="section-heading compact-heading">
+              <div>
+                <span class="eyebrow">Your quizzes</span>
+                <h2>Private live quizzes</h2>
+              </div>
+            </div>
+            <div class="form-grid compact-grid">
+              <label class="input-group">
+                <span>Search quizzes</span>
+                <input id="teacher-quiz-search" type="text" placeholder="Search by title..." />
+              </label>
+              <label class="input-group">
+                <span>Sort by</span>
+                <select id="teacher-quiz-sort">
+                  <option value="newest">Newest first</option>
+                  <option value="oldest">Oldest first</option>
+                  <option value="title-asc">Title A-Z</option>
+                  <option value="title-desc">Title Z-A</option>
+                  <option value="questions-desc">Most questions</option>
+                </select>
+              </label>
+            </div>
+            <div id="teacher-quiz-list" class="management-stack"></div>
+          </section>
+
+          <section class="glass-card">
+            <div class="section-heading compact-heading">
+              <div>
+                <span class="eyebrow">History</span>
+                <h2>Hosted sessions</h2>
+              </div>
+            </div>
+            <div id="teacher-session-list" class="session-list"></div>
+          </section>
+        </div>
+      </section>
+
+      <section class="glass-card" id="teacher-analytics-section">
+        <div class="section-heading compact-heading">
+          <div>
+            <span class="eyebrow">Analytics</span>
+            <h2>Session attempt details</h2>
+          </div>
+        </div>
+        <div id="teacher-analytics-panel" class="analytics-panel">
+          <div class="empty-state">
+            <h3>Select a completed session</h3>
+            <p>Detailed participant answers, scores, participation, and leaderboard history will appear here.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="./js/teacher.js"></script>
+  </body>
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Studio | Quixxy</title>
+    <meta name="description" content="Quixxy admin studio for global quiz management, user moderation, and bulk imports." />
+    <meta property="og:title" content="Quixxy Admin Studio" />
+    <meta property="og:description" content="Manage global quizzes, users, and bulk quiz imports." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://quixxy.in/admin.html" />
+    <link rel="canonical" href="https://quixxy.in/admin.html" />
+    <link rel="icon" type="image/svg+xml" href="./logo.svg" />
+    <link rel="manifest" href="./site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js" defer></script>
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body data-page="admin">
+    <div class="background-orb orb-one"></div>
+    <div class="background-orb orb-two"></div>
+
+    <header class="topbar shell-width">
+      <a href="./dashboard.html" class="brand-mark">
+        <span class="brand-dot"></span>
+        <span>Quixxy</span>
+      </a>
+
+      <div class="topbar-cluster">
+        <button id="theme-toggle" class="btn btn-ghost theme-toggle" type="button" aria-label="Toggle theme">
+          <span class="theme-icon">Dark</span>
+        </button>
+        <a href="./dashboard.html" class="btn btn-secondary">Dashboard</a>
+        <div class="user-chip" id="admin-user-chip">Studio</div>
+        <button id="logout-button" type="button" class="btn btn-ghost">Log Out</button>
+      </div>
+    </header>
+
+    <main class="shell-width page-stack">
+      <div class="inline-note warning-note" data-config-warning hidden>
+        Firebase is still using placeholder credentials. Update <code>config/firebase.js</code> before using the studio.
+      </div>
+
+      <section class="glass-card hero-banner">
+        <div>
+          <span class="eyebrow">Control room</span>
+          <h1 id="admin-title">Teacher Studio</h1>
+          <p class="muted-copy" id="admin-subtitle">Create quizzes, update metadata, and monitor your content.</p>
+        </div>
+
+        <div class="hero-side-meta">
+          <div class="role-pill" id="admin-role">teacher</div>
+          <div class="hero-actions">
+            <a href="./settings.html" class="btn btn-secondary">Settings</a>
+            <button id="seed-demo-button" type="button" class="btn btn-secondary">Seed Demo Quiz</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="glass-card">
+        <div class="section-heading compact-heading">
+          <div>
+            <span class="eyebrow">Bulk import</span>
+            <h2>Upload CSV, JSON, or Excel</h2>
+          </div>
+        </div>
+        <p class="muted-copy">
+          Import multiple quizzes at once. Supported fields: <code>quizTitle</code>, <code>category</code>,
+          <code>difficulty</code>, <code>description</code>, <code>durationSeconds</code>, <code>question</code>,
+          <code>optionA</code>, <code>optionB</code>, <code>optionC</code>, <code>optionD</code>, <code>correctOption</code>,
+          <code>explanation</code>.
+        </p>
+        <form id="bulk-import-form" class="stack-form" novalidate>
+          <div id="bulk-import-dropzone" class="bulk-dropzone">
+            <p><strong>Drag and drop</strong> a CSV, JSON, or Excel file here, or browse.</p>
+            <label class="input-group">
+              <span>Upload file</span>
+              <input id="bulk-import-file" type="file" accept=".csv,.json,.xlsx,.xls" required />
+            </label>
+          </div>
+          <div class="hero-actions">
+            <button id="bulk-import-preview" type="button" class="btn btn-secondary">Preview</button>
+            <button id="bulk-import-publish" type="submit" class="btn btn-primary">Publish Imported Quizzes</button>
+          </div>
+        </form>
+        <div id="bulk-import-preview-panel" class="mini-analytics-list"></div>
+      </section>
+
+      <section class="studio-grid">
+        <div class="section-stack">
+          <section class="glass-card">
+            <div class="section-heading compact-heading">
+              <div>
+                <span class="eyebrow">Quiz builder</span>
+                <h2>Create a new quiz</h2>
+              </div>
+            </div>
+
+            <form id="quiz-builder-form" class="stack-form" novalidate>
+              <div class="form-grid">
+                <label class="input-group">
+                  <span>Title</span>
+                  <input id="quiz-title-input" type="text" placeholder="Frontend Fundamentals" required />
+                </label>
+
+                <label class="input-group">
+                  <span>Category</span>
+                  <input id="quiz-category-input" type="text" placeholder="Web Development" required />
+                </label>
+              </div>
+
+              <div class="form-grid compact-grid">
+                <label class="input-group">
+                  <span>Difficulty</span>
+                  <select id="quiz-difficulty-input" required>
+                    <option value="Beginner">Beginner</option>
+                    <option value="Intermediate" selected>Intermediate</option>
+                    <option value="Advanced">Advanced</option>
+                  </select>
+                </label>
+
+                <label class="input-group">
+                  <span>Seconds per Question</span>
+                  <input id="quiz-duration-input" type="number" min="5" max="60" value="15" required />
+                </label>
+              </div>
+
+              <label class="input-group">
+                <span>Description</span>
+                <textarea id="quiz-description-input" rows="3" placeholder="Short teaser for students browsing the dashboard." required></textarea>
+              </label>
+
+              <div class="section-heading compact-heading">
+                <div>
+                  <span class="eyebrow">Questions</span>
+                  <h3>Build the question set</h3>
+                </div>
+                <button id="add-question-button" type="button" class="btn btn-secondary">Add Question</button>
+              </div>
+
+              <div id="question-builder" class="builder-stack"></div>
+
+              <div class="form-actions">
+                <button id="save-quiz-button" type="submit" class="btn btn-primary">Publish Quiz</button>
+                <button id="clear-builder-button" type="button" class="btn btn-ghost">Clear Form</button>
+              </div>
+            </form>
+          </section>
+        </div>
+
+        <div class="section-stack">
+          <section class="glass-card">
+            <div class="section-heading compact-heading">
+              <div>
+                <span class="eyebrow">Quiz management</span>
+                <h2>Existing quizzes</h2>
+              </div>
+            </div>
+            <div id="admin-quiz-list" class="management-stack"></div>
+          </section>
+
+          <section class="glass-card">
+            <div class="section-heading compact-heading">
+              <div>
+                <span class="eyebrow">Settings editor</span>
+                <h2>Update selected quiz</h2>
+              </div>
+            </div>
+
+            <form id="quiz-settings-form" class="stack-form" novalidate>
+              <input id="settings-quiz-id" type="hidden" />
+
+              <div class="form-grid">
+                <label class="input-group">
+                  <span>Title</span>
+                  <input id="settings-title" type="text" placeholder="Select a quiz to edit" />
+                </label>
+
+                <label class="input-group">
+                  <span>Category</span>
+                  <input id="settings-category" type="text" />
+                </label>
+              </div>
+
+              <div class="form-grid compact-grid">
+                <label class="input-group">
+                  <span>Difficulty</span>
+                  <select id="settings-difficulty">
+                    <option value="Beginner">Beginner</option>
+                    <option value="Intermediate">Intermediate</option>
+                    <option value="Advanced">Advanced</option>
+                  </select>
+                </label>
+
+                <label class="input-group">
+                  <span>Status</span>
+                  <select id="settings-status">
+                    <option value="published">Published</option>
+                    <option value="draft">Draft</option>
+                    <option value="archived">Archived</option>
+                  </select>
+                </label>
+              </div>
+
+              <div class="form-grid compact-grid">
+                <label class="input-group">
+                  <span>Seconds per Question</span>
+                  <input id="settings-duration" type="number" min="5" max="60" value="15" />
+                </label>
+              </div>
+
+              <label class="input-group">
+                <span>Description</span>
+                <textarea id="settings-description" rows="3"></textarea>
+              </label>
+
+              <div class="form-actions">
+                <button id="update-quiz-button" type="submit" class="btn btn-primary">Update Quiz</button>
+                <button id="clear-settings-button" type="button" class="btn btn-ghost">Clear Selection</button>
+              </div>
+            </form>
+          </section>
+        </div>
+      </section>
+
+      <section id="admin-users-section" class="glass-card">
+        <div class="section-heading compact-heading">
+          <div>
+            <span class="eyebrow">User directory</span>
+            <h2>All registered users</h2>
+          </div>
+        </div>
+        <div id="admin-user-table" class="table-shell"></div>
+      </section>
+    </main>
+
+    <script type="module" src="./js/app.js"></script>
+  </body>
+</html>

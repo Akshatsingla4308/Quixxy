@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Join Live Quiz | Quixxy</title>
+    <meta
+      name="description"
+      content="Join a Quixxy live quiz by session code or direct classroom link. No student login required."
+    />
+    <meta property="og:title" content="Join a Quixxy Live Quiz" />
+    <meta property="og:description" content="Enter your name and join a realtime classroom quiz on Quixxy." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://quixxy.in/join.html" />
+    <meta property="og:image" content="https://quixxy.in/logo.svg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Join a Quixxy Live Quiz" />
+    <meta name="twitter:description" content="Join a realtime classroom quiz with a code or direct link." />
+    <meta name="twitter:image" content="https://quixxy.in/logo.svg" />
+    <link rel="canonical" href="https://quixxy.in/join.html" />
+    <link rel="icon" type="image/svg+xml" href="./logo.svg" />
+    <link rel="manifest" href="./site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body data-page="join" class="auth-page">
+    <div class="background-orb orb-one"></div>
+    <div class="background-orb orb-three"></div>
+
+    <header class="topbar shell-width">
+      <a href="./index.html" class="brand-mark">
+        <span class="brand-dot"></span>
+        <span>Quixxy</span>
+      </a>
+      <nav class="nav-actions">
+        <button id="theme-toggle" class="btn btn-ghost theme-toggle" type="button" aria-label="Toggle theme">
+          <span class="theme-icon">Dark</span>
+        </button>
+        <a href="./login.html" class="btn btn-secondary">Teacher Login</a>
+      </nav>
+    </header>
+
+    <main class="shell-width live-join-layout">
+      <div class="inline-note warning-note" data-config-warning hidden>
+        Firebase is still using placeholder credentials. Update <code>config/firebase.js</code> before joining live quizzes.
+      </div>
+
+      <section id="join-panel" class="glass-card auth-card join-card" data-join-panel>
+        <span class="eyebrow">Live quiz</span>
+        <h1 id="join-title">Join with your code</h1>
+        <p class="muted-copy" id="join-copy">No login needed. Enter the code from your teacher and the name you want on the leaderboard.</p>
+
+        <form id="join-form" class="stack-form" novalidate>
+          <label class="input-group" id="code-field">
+            <span>Session Code</span>
+            <input id="join-code" type="text" placeholder="ABC123" autocomplete="off" required />
+          </label>
+
+          <label class="input-group">
+            <span>Your Name</span>
+            <input id="join-name" type="text" placeholder="Maya" autocomplete="name" required />
+          </label>
+
+          <button id="join-submit" class="btn btn-primary btn-block" type="submit">Join Quiz</button>
+        </form>
+      </section>
+
+      <section id="room-panel" class="glass-card auth-card join-card" data-join-panel hidden>
+        <span class="eyebrow">Waiting room</span>
+        <h1>You are in, <span id="joined-name">Player</span>.</h1>
+        <p class="muted-copy" id="waiting-copy">The teacher will start the quiz soon.</p>
+
+        <div class="join-status-grid">
+          <article>
+            <span>Code</span>
+            <strong id="joined-code">------</strong>
+          </article>
+          <article>
+            <span>Status</span>
+            <strong id="student-session-status">waiting</strong>
+          </article>
+          <article>
+            <span>Participants</span>
+            <strong id="joined-participants">0</strong>
+          </article>
+        </div>
+
+        <div class="waiting-room-participants">
+          <span class="eyebrow">Joined players</span>
+          <div id="participant-avatars" class="avatar-grid"></div>
+        </div>
+
+        <div class="waiting-animation">
+          <div class="pulse-ring"></div>
+          <div class="pulse-ring"></div>
+          <div class="pulse-ring"></div>
+        </div>
+      </section>
+
+      <section id="quiz-panel" class="glass-card quiz-stage join-card" data-join-panel hidden>
+        <div class="quiz-stage-header">
+          <div>
+            <span class="eyebrow">Live question</span>
+            <h1 id="student-question-count">Question 1</h1>
+            <p class="muted-copy" id="student-answer-status">Choose one answer.</p>
+          </div>
+          <div class="quiz-header-tools">
+            <div class="timer-pill" id="student-timer">30s</div>
+            <label class="sound-toggle">
+              <input id="join-sound-toggle" type="checkbox" checked />
+              <span>Sounds</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="quiz-progress-row">
+          <div class="progress-track">
+            <div id="student-timer-bar" class="progress-bar"></div>
+          </div>
+        </div>
+
+        <article class="question-panel">
+          <h2 id="student-question-text">Waiting for the teacher to send the next question.</h2>
+          <p id="student-reveal-status" class="feedback-copy"></p>
+          <div id="student-options" class="option-grid"></div>
+        </article>
+
+        <aside class="student-live-board">
+          <span class="eyebrow">Leaderboard</span>
+          <div id="student-live-leaderboard"></div>
+        </aside>
+      </section>
+
+      <section id="result-panel" class="glass-card join-card" data-join-panel hidden>
+        <div class="result-hero compact-result-hero">
+          <div>
+            <span class="eyebrow">Session complete</span>
+            <h1><span id="final-score">0</span> points</h1>
+            <p class="muted-copy">Nice work, <span id="final-name">Player</span>. Here is your live quiz summary.</p>
+          </div>
+
+          <div class="result-side">
+            <a href="./join.html" class="btn btn-primary">Join Another Quiz</a>
+          </div>
+        </div>
+
+        <div class="result-mini-grid live-result-grid">
+          <article>
+            <span>Correct</span>
+            <strong id="final-correct">0</strong>
+          </article>
+          <article>
+            <span>Wrong</span>
+            <strong id="final-wrong">0</strong>
+          </article>
+          <article>
+            <span>Accuracy</span>
+            <strong id="final-accuracy">0%</strong>
+          </article>
+          <article>
+            <span>Rank</span>
+            <strong id="final-rank">-</strong>
+          </article>
+        </div>
+
+        <div class="section-heading compact-heading">
+          <div>
+            <span class="eyebrow">Review</span>
+            <h2>Attempted questions</h2>
+          </div>
+        </div>
+        <div id="student-review-list" class="result-breakdown"></div>
+      </section>
+    </main>
+
+    <script type="module" src="./js/join.js"></script>
+  </body>
+</html>

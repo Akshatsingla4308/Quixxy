@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /config/
+
+Sitemap: https://quixxy.in/sitemap.xml

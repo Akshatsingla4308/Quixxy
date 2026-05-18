@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quixxy - Online Quiz Platform for Live Classroom Quizzes</title>
+    <meta
+      name="description"
+      content="Quixxy is an online quiz platform for live classroom quizzes, private teacher sessions, student dashboards, realtime leaderboards, and secure admin tools."
+    />
+    <meta property="og:title" content="Quixxy - Online Quiz Platform" />
+    <meta
+      property="og:description"
+      content="Host and join realtime live quizzes with session codes, private teacher portals, analytics, and leaderboards."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://quixxy.in/" />
+    <meta property="og:site_name" content="Quixxy" />
+    <meta property="og:image" content="https://quixxy.in/logo.svg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Quixxy - Online Quiz Platform" />
+    <meta name="twitter:description" content="Realtime classroom quizzes with role-based dashboards and live leaderboards." />
+    <meta name="twitter:image" content="https://quixxy.in/logo.svg" />
+    <link rel="canonical" href="https://quixxy.in/" />
+    <link rel="icon" type="image/svg+xml" href="./logo.svg" />
+    <link rel="manifest" href="./site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "name": "Quixxy",
+            "url": "https://quixxy.in/",
+            "logo": "https://quixxy.in/logo.svg"
+          },
+          {
+            "@type": "WebApplication",
+            "name": "Quixxy",
+            "url": "https://quixxy.in/",
+            "applicationCategory": "EducationalApplication",
+            "description": "Online quiz platform for live classroom quizzes, teacher portals, student dashboards, and realtime leaderboards.",
+            "operatingSystem": "Web"
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body data-page="index" class="landing-page">
+    <div class="background-orb orb-one"></div>
+    <div class="background-orb orb-two"></div>
+    <div class="background-orb orb-three"></div>
+
+    <header class="topbar shell-width">
+      <a href="./index.html" class="brand-mark">
+        <span class="brand-dot"></span>
+        <span>Quixxy</span>
+      </a>
+
+      <nav class="nav-actions">
+        <button id="theme-toggle" class="btn btn-ghost theme-toggle" type="button" aria-label="Toggle theme">
+          <span class="theme-icon">Dark</span>
+        </button>
+        <a href="./login.html" class="btn btn-ghost">Login</a>
+        <a href="./join.html" class="btn btn-secondary">Join Live Quiz</a>
+        <a href="./dashboard.html" class="btn btn-secondary">Dashboard</a>
+        <a href="./teacher.html" class="btn btn-secondary">Teacher Portal</a>
+        <a href="./signup.html" class="btn btn-primary">Create Account</a>
+      </nav>
+    </header>
+
+    <main class="shell-width">
+      <section class="hero-grid">
+        <div class="hero-copy glass-card">
+          <span class="eyebrow">Realtime quiz platform</span>
+          <h1>Fast, competitive learning for students, teachers, and admins.</h1>
+          <p class="lead">
+            Quixxy blends timed quizzes, role-based dashboards, and Firebase-powered data into a clean SaaS-style quiz experience.
+          </p>
+
+          <div class="hero-actions">
+            <a href="./signup.html" class="btn btn-primary btn-large">Start Free</a>
+            <a href="./join.html" class="btn btn-secondary btn-large">Join Live Quiz</a>
+            <a href="./login.html" class="btn btn-secondary btn-large">Open Workspace</a>
+          </div>
+
+          <div class="metric-strip">
+            <article>
+              <strong>15s</strong>
+              <span>Per-question timer</span>
+            </article>
+            <article>
+              <strong>Roles</strong>
+              <span>Student, teacher, admin</span>
+            </article>
+            <article>
+              <strong>Cloud</strong>
+              <span>Firebase Auth + Firestore</span>
+            </article>
+          </div>
+        </div>
+
+        <aside class="hero-preview glass-card">
+          <div class="preview-stack">
+            <article class="preview-panel accent-panel">
+              <span class="preview-label">Live leaderboard</span>
+              <h2>Frontend Sprint</h2>
+              <ul class="mini-list">
+                <li><span>1</span><b>Jade</b><em>96%</em></li>
+                <li><span>2</span><b>Arun</b><em>92%</em></li>
+                <li><span>3</span><b>Nia</b><em>88%</em></li>
+              </ul>
+            </article>
+
+            <article class="preview-panel">
+              <span class="preview-label">Teacher studio</span>
+              <h3>Create quizzes in minutes</h3>
+              <p>Draft question sets, publish instantly, and monitor performance with one streamlined control room.</p>
+            </article>
+          </div>
+        </aside>
+      </section>
+
+      <section class="feature-section">
+        <div class="section-heading">
+          <span class="eyebrow">Platform features</span>
+          <h2>Built like a small product, not a demo toy.</h2>
+        </div>
+
+        <div class="feature-grid">
+          <article class="glass-card feature-card">
+            <h3>Secure auth flow</h3>
+            <p>Firebase email and password authentication with role-aware redirects and protected routes.</p>
+          </article>
+
+          <article class="glass-card feature-card">
+            <h3>Focused quiz engine</h3>
+            <p>One-question flow, visual answer feedback, countdown timer, and auto-submit on timeout.</p>
+          </article>
+
+          <article class="glass-card feature-card">
+            <h3>Teacher tooling</h3>
+            <p>Composable quiz builder for category, difficulty, duration, and multi-question publishing.</p>
+          </article>
+
+          <article class="glass-card feature-card">
+            <h3>Admin oversight</h3>
+            <p>User directory, quiz moderation, leaderboard visibility, and content cleanup controls.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="./js/app.js"></script>
+  </body>
+</html>
